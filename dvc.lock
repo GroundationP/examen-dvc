@@ -3,6 +3,11 @@ stages:
   load_data:
     cmd: python src/models/load_data.py
     deps:
+    - path: src/data/processed
+      hash: md5
+      md5: d2e9817760fea61851e2e1e32d9ce75c.dir
+      size: 579798
+      nfiles: 6
     - path: src/models/load_data.py
       hash: md5
       md5: aff5e3d26d91a3bf111dab6d83168316
@@ -27,6 +32,14 @@ stages:
   norm_data:
     cmd: python src/models/norm_data.py
     deps:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 707de7ab5221df8365ee5c622414e388
+      size: 79148
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 262dc7a9b32e262a3896db9b7cb632ef
+      size: 184057
     - path: src/models/norm_data.py
       hash: md5
       md5: 645959ab5405f9b6045dd2bdda565c37
@@ -43,6 +56,14 @@ stages:
   grid_search_data:
     cmd: python src/models/grid_search.py
     deps:
+    - path: data/processed/X_train_scaled.csv
+      hash: md5
+      md5: 949fb334e27072290cd8dcb4624efd56
+      size: 198672
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 8eeb47fac58928dc66f5992035227df4
+      size: 22759
     - path: src/models/grid_search.py
       hash: md5
       md5: df56ce65311841aa5ed34827e986c989
@@ -55,6 +76,18 @@ stages:
   train_rf:
     cmd: python src/models/train_model.py
     deps:
+    - path: data/processed/X_train_scaled.csv
+      hash: md5
+      md5: 949fb334e27072290cd8dcb4624efd56
+      size: 198672
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 8eeb47fac58928dc66f5992035227df4
+      size: 22759
+    - path: models/best_params.pkl
+      hash: md5
+      md5: 2824628d3eb7b76c7f8fdb6dfd0ed25b
+      size: 112
     - path: src/models/train_model.py
       hash: md5
       md5: e36dd4f24481f7345980c636221744cd
@@ -67,6 +100,26 @@ stages:
   eval_rf:
     cmd: python src/models/eval_model.py
     deps:
+    - path: data/processed/X_test_scaled.csv
+      hash: md5
+      md5: d88f7b762247806ce779f1da894f6631
+      size: 85439
+    - path: data/processed/X_train_scaled.csv
+      hash: md5
+      md5: 949fb334e27072290cd8dcb4624efd56
+      size: 198672
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: 5b38d7f1d33d69d59474bfe27d9d039d
+      size: 9723
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 8eeb47fac58928dc66f5992035227df4
+      size: 22759
+    - path: models/best_rforest.sav
+      hash: md5
+      md5: 22f2e7a29a574eb5f2360562b151208a
+      size: 1392388
     - path: src/models/eval_model.py
       hash: md5
       md5: 5fa9c0bdb077e263896ee682e8a094cc
